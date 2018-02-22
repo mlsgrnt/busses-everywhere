@@ -16,7 +16,8 @@ class Locate extends Component {
 			async position => {
 				const nearby = vbb.nearby({
 					latitude: position.coords.latitude,
-					longitude: position.coords.longitude
+					longitude: position.coords.longitude,
+					facing: 'south'
 				});
 
 				this.props.handleStation(await nearby);
