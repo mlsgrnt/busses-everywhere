@@ -4,12 +4,23 @@ import './App.css';
 
 import vbb from 'vbb-client';
 import Locate from './Locate';
+import Arrivals from './Arrivals';
 
 class App extends Component {
+	constructor() {
+		super();
+
+		this.state = {
+			station: undefined,
+			arrivals: undefined
+		};
+	}
+
 	handleStation = async nearestStation => {
 		const arrivals = await vbb.departures(nearestStation[0].id);
 		this.setState({
-			arrivals: arrivals
+			arrivals: arrivals,
+			station: nearestStation[0]
 		});
 	};
 
@@ -21,8 +32,14 @@ class App extends Component {
 					<h1 className="App-title">Welcome to React</h1>
 				</header>
 				<p className="App-intro">
-					To get started, edit <code>src/App.js</code> and save to reload.
-					<Locate handleStation={this.handleStation} />
+					{this.state.arrivals ? (
+						<div>
+							{this.state.station.name}
+							<Arrivals arrivals={this.state.arrivals} />
+						</div>
+					) : (
+						<Locate handleStation={this.handleStation} />
+					)}
 				</p>
 			</div>
 		);
