@@ -20,16 +20,16 @@ class Locate extends Component {
 				});
 
 				this.props.handleStation(await nearby);
-				const nextStationInDirection = this.findDirection(
+				/*const nextStationInDirection = this.findDirection(
 					await nearby,
 					position.coords
-				);
+				);*/
 
 				this.setState({
-					loading: true,
-					nextStationInDirection
+					loading: true /*,
+					nextStationInDirection*/
 				});
-				console.log('next station in direction: ', nextStationInDirection);
+				//console.log('next station in direction: ', nextStationInDirection);
 			},
 			error => {
 				console.log(error);
@@ -37,7 +37,7 @@ class Locate extends Component {
 			{ enableHighAccuracy: true }
 		);
 	};
-
+	/*
 	findDirection = (nearestStations, position) => {
 		console.log(position, position.heading); //for some reason it doesn't work without this
 		let facing;
@@ -78,7 +78,7 @@ class Locate extends Component {
 
 		return nearestStations[i];
 	};
-
+*/
 	render() {
 		return (
 			<span className="App">
