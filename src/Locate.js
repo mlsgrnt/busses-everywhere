@@ -11,8 +11,9 @@ class Locate extends Component {
 		};
 	}
 
-	wo = () => {
-		navigator.geolocation.watchPosition(
+	componentDidMount = () => {
+		//TODO: watchPosition with intelligence! --> rate limit by coordinate change %
+		navigator.geolocation.getCurrentPosition(
 			async position => {
 				const nearby = vbb.nearby({
 					latitude: position.coords.latitude,
@@ -85,7 +86,12 @@ class Locate extends Component {
 				{this.state.loading ? (
 					<span>loading</span>
 				) : (
-					<button onClick={() => this.wo()}>WOOOOO</button>
+					<span>
+						loading the loading
+						{/*<button onClick={() => this.componentDidMount()}>
+						Click Me To Begin
+					</button>*/}
+					</span>
 				)}
 			</span>
 		);

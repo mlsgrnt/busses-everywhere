@@ -1,28 +1,33 @@
 .App {
-  text-align: center;
+	text-align: center;
+	color: white;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.stationName {
+	font-size: 10vh;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.bus,
+.tram,
+.subway,
+li[id^='u'] {
+	padding: 15px;
+	margin: 5px;
 }
 
-.App-title {
-  font-size: 1.5em;
+.bus {
+	background-color: #95276e;
 }
-
-.App-intro {
-  font-size: large;
+.tram {
+	background-color: #be1414;
 }
-
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+li[id^='tram-m'],
+li[id^='bus-m'] {
+	background-color: #f47920;
+}
+#u8 {
+	background-color: #224f86;
+}
+#u9 {
+	background-color: #f3791d;
 }
