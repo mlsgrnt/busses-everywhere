@@ -6317,8 +6317,8 @@ vary@~1.1.2:
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
 "vbb-client@https://github.com/blydro/vbb-client":
-  version "3.0.2"
-  resolved "https://github.com/blydro/vbb-client#cea8ab544bcc34cb9dae4fd6be7c160798b670dd"
+  version "3.0.3"
+  resolved "https://github.com/blydro/vbb-client#845b2c7c128ca6daf381bf500cb66278fcb111ff"
   dependencies:
     fetch-ponyfill "^4.0.0"
     ndjson "^1.4.3"
