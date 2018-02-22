@@ -16,11 +16,11 @@ class App extends Component {
 		};
 	}
 
-	handleStation = async nearestStation => {
-		const arrivals = await vbb.departures(nearestStation[0].id);
+	handleStation = async nearestStations => {
+		const arrivals = await vbb.departures(nearestStations[0].id);
 		this.setState({
 			arrivals: arrivals,
-			station: nearestStation[0]
+			station: nearestStations[0]
 		});
 	};
 
@@ -31,7 +31,7 @@ class App extends Component {
 					<img src={logo} className="App-logo" alt="logo" />
 					<h1 className="App-title">Welcome to React</h1>
 				</header>
-				<p className="App-intro">
+				<div className="App-intro">
 					{this.state.arrivals ? (
 						<div>
 							{this.state.station.name}
@@ -40,7 +40,7 @@ class App extends Component {
 					) : (
 						<Locate handleStation={this.handleStation} />
 					)}
-				</p>
+				</div>
 			</div>
 		);
 	}
