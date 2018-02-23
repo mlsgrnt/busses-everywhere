@@ -13,6 +13,9 @@
 .bus,
 .tram,
 .subway,
+.suburban,
+.ferry,
+.regional,
 li[id^='u'] {
 	padding: 15px;
 	margin: 0px;
@@ -25,13 +28,97 @@ li[id^='u'] {
 .tram {
 	background-color: #be1414;
 }
+.suburban {
+	background-color: #006f38;
+}
+.subway {
+	background-color: #115d91;
+}
+.ferry {
+	background-color: #528dba;
+}
+.regional {
+	background-color: #c1121c;
+}
+
 li[id^='tram-m'],
 li[id^='bus-m'] {
 	background-color: #f47920;
+}
+
+#u1 {
+	background-color: #7dad4c;
+}
+#u2 {
+	background-color: #da421e;
+}
+#u3 {
+	background-color: #007a5b;
+}
+#u4 {
+	background-color: #f0d722;
+}
+#u5 {
+	background-color: #7e5330;
+}
+#u6 {
+	background-color: #8c6dab;
+}
+#u7 {
+	background-color: #528dba;
 }
 #u8 {
 	background-color: #224f86;
 }
 #u9 {
 	background-color: #f3791d;
+}
+
+#s1 {
+	background-color: #de4da4;
+}
+#s2 {
+	background-color: #005f27;
+}
+#s25 {
+	background-color: #005f27;
+}
+#s26 {
+	background-color: #005f27;
+}
+#s3 {
+	background-color: #0a4c99;
+}
+#s41 {
+	background-color: #a23b1e;
+}
+#s42 {
+	background-color: #c26a36;
+}
+#s45 {
+	background-color: #c38737;
+}
+#s46 {
+	background-color: #c38737;
+}
+#s47 {
+	background-color: #c38737;
+}
+#s5 {
+	background-color: #ff5900;
+}
+#s75 {
+	background-color: #6f4e9c;
+}
+#s7 {
+	background-color: #6f4e9c;
+}
+#s8 {
+	background-color: #55a822;
+}
+#s85 {
+	background-color: #55a822;
+}
+#s9 {
+	background-color: #8a0e30;
 }
