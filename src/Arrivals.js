@@ -6,7 +6,7 @@ class Arrivals extends Component {
 	render() {
 		const renderedArrivals = this.props.arrivals.map(arrival => (
 			<li
-				key={arrival.trip}
+				key={arrival.journeyId}
 				className={arrival.line.product}
 				id={arrival.line.id}
 			>
