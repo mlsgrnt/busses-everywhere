@@ -7,30 +7,42 @@ class Locate extends Component {
 		super();
 
 		this.state = {
-			loading: false
+			loading: false,
+			position: { coords: { latitude: 0, longitude: 0 } }
 		};
 	}
 
-	componentDidMount = () => {
-		//TODO: watchPosition with intelligence! --> rate limit by coordinate change %
-		navigator.geolocation.getCurrentPosition(
-			async position => {
-				const nearby = vbb.nearby({
-					latitude: position.coords.latitude,
-					longitude: position.coords.longitude
-				});
+	findStop = async position => {
+		const nearby = vbb.nearby({
+			latitude: position.coords.latitude,
+			longitude: position.coords.longitude
+		});
 
-				this.props.handleStation(await nearby);
-				/*const nextStationInDirection = this.findDirection(
+		this.props.handleStation(await nearby);
+		/*const nextStationInDirection = this.findDirection(
 					await nearby,
 					position.coords
 				);*/
 
-				this.setState({
-					loading: true /*,
+		this.setState({
+			loading: true /*,
 					nextStationInDirection*/
-				});
-				//console.log('next station in direction: ', nextStationInDirection);
+		});
+		//console.log('next station in direction: ', nextStationInDirection);
+	};
+
+	componentDidMount = () => {
+		navigator.geolocation.watchPosition(
+			position => {
+				if (
+					position.coords.latitude - this.state.position.coords.latitude >
+					0.0001
+				) {
+					this.setState({
+						position
+					});
+					this.findStop(position);
+				}
 			},
 			error => {
 				console.log(error);
