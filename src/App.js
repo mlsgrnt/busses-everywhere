@@ -26,7 +26,7 @@ class App extends Component {
 
 		const arrivals = await vbb.departures(station.id);
 		this.setState({
-			arrivals
+			arrivals: arrivals
 		});
 	};
 
