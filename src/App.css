@@ -4,7 +4,10 @@
 }
 
 .stationName {
-	font-size: 10vh;
+	display: block;
+	font-size: 30px;
+	margin: 5px;
+	word-break: keep-all;
 }
 
 .bus,
@@ -12,7 +15,8 @@
 .subway,
 li[id^='u'] {
 	padding: 15px;
-	margin: 5px;
+	margin: 0px;
+	border: 0.1px solid rgba(0, 0, 0, 0.1);
 }
 
 .bus {

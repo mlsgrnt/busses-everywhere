@@ -36,7 +36,7 @@ class Locate extends Component {
 			position => {
 				if (
 					position.coords.latitude - this.state.position.coords.latitude >
-					0.0001
+					0.00001
 				) {
 					this.setState({
 						position
