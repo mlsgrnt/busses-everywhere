@@ -19,6 +19,7 @@ class App extends Component {
 
 	getArrivals = async station => {
 		//preapre for next time
+		//but if we're called eariler reset that timer
 		clearTimeout(updateTimeout);
 		updateTimeout = setTimeout(() => {
 			this.getArrivals(this.state.station);
