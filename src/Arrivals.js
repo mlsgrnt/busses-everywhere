@@ -24,4 +24,8 @@ class Arrivals extends Component {
 	}
 }
 
+Arrivals.defaultProps = {
+	arrivals: []
+};
+
 export default Arrivals;

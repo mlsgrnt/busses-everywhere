@@ -5,35 +5,47 @@ import vbb from 'vbb-client';
 import Locate from './Locate';
 import Arrivals from './Arrivals';
 
+let updateTimeout;
+
 class App extends Component {
 	constructor() {
 		super();
 
 		this.state = {
-			station: undefined,
+			station: { name: '' },
 			arrivals: undefined
 		};
 	}
 
-	handleStation = async nearestStations => {
-		const arrivals = await vbb.departures(nearestStations[0].id);
+	getArrivals = async station => {
+		//preapre for next time
+		clearTimeout(updateTimeout);
+		updateTimeout = setTimeout(() => {
+			this.getArrivals(this.state.station);
+		}, 30000);
+
+		const arrivals = await vbb.departures(station.id);
 		this.setState({
-			arrivals: arrivals,
+			arrivals
+		});
+	};
+
+	handleStation = nearestStations => {
+		this.setState({
 			station: nearestStations[0]
 		});
+
+		this.getArrivals(this.state.station);
 	};
 
 	render() {
 		return (
 			<div className="container">
-				{this.state.arrivals ? (
-					<div>
-						<span className="stationName">{this.state.station.name}</span>
-						<Arrivals arrivals={this.state.arrivals} />
-					</div>
-				) : (
-					<Locate handleStation={this.handleStation} />
-				)}
+				<div>
+					<span className="stationName">{this.state.station.name}</span>
+					<Arrivals arrivals={this.state.arrivals} />
+				</div>
+				<Locate handleStation={this.handleStation} />
 			</div>
 		);
 	}
