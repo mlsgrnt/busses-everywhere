@@ -31,7 +31,7 @@ class Locate extends Component {
 		//console.log('next station in direction: ', nextStationInDirection);
 	};
 
-	componentDidMount = () => {
+	getPosition = () => {
 		navigator.geolocation.watchPosition(
 			position => {
 				if (
@@ -53,6 +53,10 @@ class Locate extends Component {
 			},
 			{ enableHighAccuracy: true }
 		);
+	};
+
+	componentDidMount = () => {
+		this.getPosition();
 	};
 	/*
 	findDirection = (nearestStations, position) => {
@@ -100,13 +104,13 @@ class Locate extends Component {
 		return (
 			<span className="App">
 				{this.state.loading ? (
-					<span>loading</span>
+					<span className="loading" />
 				) : (
 					<span>
 						loading the loading
-						{/*<button onClick={() => this.componentDidMount()}>
-						Click Me To Begin
-					</button>*/}
+						<button onClick={() => this.getPosition()}>
+							Click Me If Chrome is being shitty
+						</button>
 					</span>
 				)}
 			</span>

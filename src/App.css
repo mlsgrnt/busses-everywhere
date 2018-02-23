@@ -3,6 +3,10 @@
 	color: white;
 }
 
+.loading {
+	color: #333;
+}
+
 .stationName {
 	display: block;
 	font-size: 30px;
