@@ -1,5 +1,5 @@
 .App {
-	text-align: center;
+	text-align: left;
 	color: white;
 }
 
@@ -8,6 +8,10 @@
 	font-size: 30px;
 	margin: 5px;
 	word-break: keep-all;
+}
+
+.timeTo {
+	float: right;
 }
 
 .bus,

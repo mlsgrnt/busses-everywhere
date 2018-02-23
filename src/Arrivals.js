@@ -11,8 +11,10 @@ class Arrivals extends Component {
 				id={arrival.line.id}
 			>
 				{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')} to{' '}
-				{arrival.direction} in{' '}
-				<strong>{distanceInWords(arrival.when, new Date())}</strong>
+				{arrival.direction}
+				<strong className="timeTo">
+					{distanceInWords(arrival.when, new Date())}
+				</strong>
 			</li>
 		));
 
