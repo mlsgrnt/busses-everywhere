@@ -3941,6 +3941,10 @@ lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -6323,6 +6327,12 @@ vary@~1.1.2:
     fetch-ponyfill "^4.0.0"
     ndjson "^1.4.3"
     pinkie-promise "^2.0.1"
+
+vbb-stations@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/vbb-stations/-/vbb-stations-6.2.1.tgz#8988b975a01a4caa7fbb92debac6202757d74ed4"
+  dependencies:
+    lodash.get "^4.4.2"
 
 vendors@^1.0.0:
   version "1.0.1"

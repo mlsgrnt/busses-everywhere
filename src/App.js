@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 
 import vbb from 'vbb-client';
+import stations from 'vbb-stations';
+
 import Locate from './Locate';
 import Arrivals from './Arrivals';
 
@@ -26,12 +28,50 @@ class App extends Component {
 		}, 30000);
 
 		const arrivals = await vbb.departures(station.id);
+
+		//very muchWIP --> TODO TODO TODO
+		if (this.state.positionData) {
+			for (let i in arrivals) {
+				let stationLocation = stations(arrivals[i].direction)[0];
+				if (stationLocation) {
+					stationLocation = stationLocation.location;
+				} else {
+					break;
+				}
+
+				if (this.state.positionData.facing === 'north') {
+					//we're facing north but the station is south? DELETE DAT --> TODO MAKE THIS A LOT SMARTER (line shape)
+					if (
+						stationLocation.longitude <
+						this.state.positionData.position.coords.longitude
+					) {
+						delete arrivals[i];
+					}
+				}
+				if (this.state.positionData.facing === 'south') {
+					//we're facing south but the station is north? DELETE DAT --> TODO MAKE THIS A LOT SMARTER (line shape)
+					if (
+						stationLocation.longitude >
+						this.state.positionData.position.coords.longitude
+					) {
+						delete arrivals[i];
+					}
+				}
+			}
+		}
+
 		this.setState({
 			arrivals: arrivals
 		});
 	};
 
-	handleStation = nearestStations => {
+	handleStation = (nearestStations, positionData) => {
+		if (positionData) {
+			this.setState({
+				positionData
+			});
+		}
+
 		this.setState({
 			station: nearestStations[0]
 		});
