@@ -18,10 +18,7 @@ class Locate extends Component {
 			longitude: position.coords.longitude
 		});
 
-		this.props.handleStation(await nearby, {
-			position: this.state.position,
-			facing: this.state.facing
-		}); //badhack TODO
+		this.props.handleStation(await nearby);
 
 		this.setState({
 			loading: true

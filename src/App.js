@@ -28,51 +28,14 @@ class App extends Component {
 
 		const arrivals = await vbb.departures(station.id);
 
-		//very muchWIP --> TODO TODO TODO
-		if (this.state.positionData) {
-			for (let i in arrivals) {
-				//let stationLocation = stations(arrivals[i].direction)[0]; TODO TODO TODO
-				//console.log(await vbb.station(arrivals[i].line.id));
-				let stationLocation = false;
-				if (stationLocation) {
-					stationLocation = stationLocation.location;
-				} else {
-					break;
-				}
-
-				if (this.state.positionData.facing === 'north') {
-					//we're facing north but the station is south? DELETE DAT --> TODO MAKE THIS A LOT SMARTER (line shape)
-					if (
-						stationLocation.longitude <
-						this.state.positionData.position.coords.longitude
-					) {
-						delete arrivals[i];
-					}
-				}
-				if (this.state.positionData.facing === 'south') {
-					//we're facing south but the station is north? DELETE DAT --> TODO MAKE THIS A LOT SMARTER (line shape)
-					if (
-						stationLocation.longitude >
-						this.state.positionData.position.coords.longitude
-					) {
-						delete arrivals[i];
-					}
-				}
-			}
-		}
+		//somehow filter arrivlas here?!
 
 		this.setState({
 			arrivals: arrivals
 		});
 	};
 
-	handleStation = (nearestStations, positionData) => {
-		if (positionData) {
-			this.setState({
-				positionData
-			});
-		}
-
+	handleStation = nearestStations => {
 		this.setState({
 			station: nearestStations[0]
 		});
