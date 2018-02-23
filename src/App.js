@@ -2,7 +2,7 @@ import React, { Component } from 'react';
 import './App.css';
 
 import vbb from 'vbb-client';
-import stations from 'vbb-stations';
+//import stations from 'vbb-stations';TODO TODO TODO
 
 import Locate from './Locate';
 import Arrivals from './Arrivals';
@@ -32,7 +32,8 @@ class App extends Component {
 		//very muchWIP --> TODO TODO TODO
 		if (this.state.positionData) {
 			for (let i in arrivals) {
-				let stationLocation = stations(arrivals[i].direction)[0];
+				//let stationLocation = stations(arrivals[i].direction)[0]; TODO TODO TODO
+				let stationLocation = false;
 				if (stationLocation) {
 					stationLocation = stationLocation.location;
 				} else {
