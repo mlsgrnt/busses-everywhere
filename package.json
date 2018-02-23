@@ -7,8 +7,7 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-scripts": "1.1.1",
-		"vbb-client": "https://github.com/blydro/vbb-client",
-		"vbb-stations": "^6.2.1"
+		"vbb-client": "https://github.com/blydro/vbb-client"
 	},
 	"scripts": {
 		"start": "react-scripts start",
