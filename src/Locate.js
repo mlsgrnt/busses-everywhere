@@ -108,9 +108,9 @@ class Locate extends Component {
 				) : (
 					<span>
 						loading the loading
-						<button onClick={() => this.getPosition()}>
+						{/*<button onClick={() => this.getPosition()}>
 							Click Me If Chrome is being shitty
-						</button>
+						</button>*/}
 					</span>
 				)}
 			</span>
