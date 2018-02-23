@@ -10,8 +10,10 @@ class Arrivals extends Component {
 				className={arrival.line.product}
 				id={arrival.line.id}
 			>
-				{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')} to{' '}
-				{arrival.direction}
+				<span className="info">
+					{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')}{' '}
+					{arrival.direction}
+				</span>
 				<strong className="timeTo">
 					{distanceInWords(arrival.when, new Date())}
 				</strong>

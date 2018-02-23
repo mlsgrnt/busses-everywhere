@@ -17,6 +17,10 @@
 .timeTo {
 	float: right;
 }
+.info {
+	max-width: 55vw;
+	display: inline-block;
+}
 
 .bus,
 .tram,
@@ -28,6 +32,7 @@ li[id^='u'] {
 	padding: 15px;
 	margin: 0px;
 	border: 0.1px solid rgba(0, 0, 0, 0.1);
+	height: 40px;
 }
 
 .bus {
