@@ -3092,7 +3092,7 @@ he@1.1.x:
 
 hifo@^0.7.0:
   version "0.7.0"
-  resolved "https://github.com/blydro/hifo#19946af97a65b1f67f9c83a8d3dd8ca9ab250cca"
+  resolved "https://registry.yarnpkg.com/hifo/-/hifo-0.7.0.tgz#6f906356b9a06f4ba888f8749fa7f48cf0eac5e3"
 
 hmac-drbg@^1.0.0:
   version "1.0.1"
