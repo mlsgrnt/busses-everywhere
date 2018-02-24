@@ -61,6 +61,10 @@ class Locate extends Component {
 		});
 
 		this.getPosition();
+		setInterval(() => {
+			console.log(this.state);
+			this.findStop(this.state.position);
+		}, 5000);
 	};
 
 	handleCompassData = heading => {
