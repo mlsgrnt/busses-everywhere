@@ -17,6 +17,7 @@
 		"now-build":
 			"cd node_modules/vbb-stations/ && npm i && npm run build && cd ../.. && cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && npm run build",
 		"build": "react-scripts build",
+		"surge": "react-scripts build && cd build && surge",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
 	},
