@@ -56,7 +56,7 @@ class App extends Component {
 		return (
 			<div className="container">
 				<div>
-					<span className="stationName">{this.state.station.name}</span>
+					<h1 className="stationName">{this.state.station.name}</h1>
 					<Arrivals arrivals={this.state.arrivals} />
 				</div>
 				<Locate handleStation={this.handleStation} />
