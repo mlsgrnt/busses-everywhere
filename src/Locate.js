@@ -17,21 +17,7 @@ class Locate extends Component {
 			longitude: position.coords.longitude
 		});
 
-		const nextStation = this.state.directionalPosition
-			? vbb.nearby({
-					latitude: this.state.directionalPosition.latitude,
-					longitude: this.state.directionalPosition.longitude
-				})
-			: undefined;
-
-		//if Nextstatino existed, that means we have compassdata and should update regularly
-		if (nextStation !== undefined) {
-			setTimeout(() => {
-				this.findStop(this.state.position);
-			}, 3000);
-		}
-
-		this.props.handleStation(await nearby, await nextStation);
+		this.props.handleStation(await nearby);
 
 		this.setState({
 			loading: true
@@ -67,12 +53,20 @@ class Locate extends Component {
 			this.handleCompassData(orientation.webkitCompassHeading);
 		});
 
+		this.getPosition();
+
 		//TEMP TODO FIX
 		//because the compass takes a second to spin up
-		this.getPosition();
-		setTimeout(() => {
-			this.findStop(this.state.position);
-		}, 1000);
+		setInterval(async () => {
+			if (this.state.directionalPosition !== undefined) {
+				this.props.handleDirectionChange(
+					await vbb.nearby({
+						latitude: this.state.directionalPosition.latitude,
+						longitude: this.state.directionalPosition.longitude
+					})
+				);
+			}
+		}, 5000);
 	};
 
 	handleCompassData = heading => {

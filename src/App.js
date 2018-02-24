@@ -14,7 +14,7 @@ class App extends Component {
 
 		this.state = {
 			station: { name: '' },
-			nextStation: { name: '' },
+			directionMode: false,
 			arrivals: undefined
 		};
 	}
@@ -32,31 +32,12 @@ class App extends Component {
 			results: 10
 		});
 
-		//somehow filter arrivlas here?!
-		if (this.state.nextStation.id) {
-			const potentialJourney = await vbb.journeys(
-				station.id,
-				this.state.nextStation.id
-			);
-			const ourDirection = potentialJourney[0].legs[0].direction;
-			for (let i in arrivals) {
-				if (arrivals[i].direction !== ourDirection) {
-					delete arrivals[i];
-				}
-			}
-		}
 		this.setState({
 			arrivals: arrivals
 		});
 	};
 
-	handleStation = (nearestStations, nextStations) => {
-		if (nextStations && nextStations[0]) {
-			this.setState({
-				nextStation: nextStations[0]
-			});
-		}
-
+	handleStation = nearestStations => {
 		if (!nearestStations[0]) {
 			this.setState({
 				station: { name: "it's all gone to shit" }
@@ -70,16 +51,48 @@ class App extends Component {
 		this.getArrivals(this.state.station);
 	};
 
+	handleDirectionChange = async nextStations => {
+		const nextStation = nextStations[0];
+		//somehow filter arrivlas here?!
+		if (nextStation.id) {
+			const potentialJourney = await vbb.journeys(
+				this.state.station.id,
+				nextStation.id
+			);
+			const ourDirection = potentialJourney[0].legs[0].direction;
+
+			const arrivals = this.state.arrivals;
+			for (let i in arrivals) {
+				if (arrivals[i].direction !== ourDirection) {
+					delete arrivals[i];
+				}
+			}
+			this.setState({
+				filteredArrivals: arrivals,
+				directionMode: 'debug' + ourDirection
+			});
+		}
+	};
+
 	render() {
 		return (
 			<div className="container">
 				<div>
 					<h1 className="stationName">{this.state.station.name}</h1>
-					<span>{this.state.nextStation.name}</span>
+					<span>{this.state.directionMode.toString()}</span>
 
-					<Arrivals arrivals={this.state.arrivals} />
+					<Arrivals
+						arrivals={
+							this.state.filteredArrivals
+								? this.state.filteredArrivals
+								: this.state.arrivals
+						}
+					/>
 				</div>
-				<Locate handleStation={this.handleStation} />
+				<Locate
+					handleStation={this.handleStation}
+					handleDirectionChange={this.handleDirectionChange}
+				/>
 			</div>
 		);
 	}
