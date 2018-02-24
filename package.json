@@ -7,7 +7,6 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-scripts": "1.1.1",
-		"serve": "^6.4.11",
 		"vbb-client": "https://github.com/blydro/vbb-client",
 		"vbb-stations": "https://github.com/blydro/vbb-stations",
 		"vbb-stations-autocomplete": "^3.2.0"
@@ -16,14 +15,14 @@
 		"start": "react-scripts start",
 		"now-start": "serve -s build",
 		"now-build":
-			"cd node_modules/vbb-stations/ && npm i && npm run build && cd ../.. && npm run build",
-		"build":
-			"cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && react-scripts build",
+			"cd node_modules/vbb-stations/ && npm i && npm run build && cd ../.. && cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && npm run build",
+		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
 	},
 	"devDependencies": {
 		"babel-cli": "^6.26.0",
-		"babel-preset-es2015": "^6.24.1"
+		"babel-preset-es2015": "^6.24.1",
+		"serve": "^6.4.11"
 	}
 }
