@@ -86,11 +86,11 @@ class App extends Component {
 			};
 
 			const oa = locationDifference.updown / locationDifference.leftright;
-			const tan = Math.tan(heading * Math.PI / 180);
+			const tan = Math.cos(heading * Math.PI / 180);
 
 			const score = (tan - oa) / tan * 100;
 
-			/*console.log(
+			console.log(
 				direction,
 				'with scores',
 				oa,
@@ -98,7 +98,7 @@ class App extends Component {
 				score,
 				'at direction',
 				heading
-			); */
+			);
 
 			if (Math.abs(score) < 100) {
 				//100% error seems to be sweet spot
@@ -110,7 +110,6 @@ class App extends Component {
 			//whoopsie hehe
 			filteredArrivals = this.state.arrivals;
 		}
-		console.log(this.state.arrivals.length, arrivals.length);
 		this.setState({
 			filteredArrivals,
 			directionMode: 'debug'
