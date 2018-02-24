@@ -4,6 +4,17 @@ import { differenceInMinutes } from 'date-fns';
 
 class Arrivals extends Component {
 	render() {
+		const renderMinutes = differential => {
+			if (differential === 0) {
+				return 'now';
+			}
+			if (differential < 0) {
+				return 'here';
+			}
+
+			return differential;
+		};
+
 		const renderedArrivals = this.props.arrivals.map(arrival => (
 			<li
 				key={arrival.journeyId}
@@ -17,9 +28,7 @@ class Arrivals extends Component {
 					{arrival.direction}
 				</span>
 				<strong className="timeTo">
-					{differenceInMinutes(arrival.when, new Date()) === 0
-						? 'now'
-						: differenceInMinutes(arrival.when, new Date())}
+					{renderMinutes(differenceInMinutes(arrival.when, new Date()))}
 				</strong>
 			</li>
 		));

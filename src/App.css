@@ -9,17 +9,18 @@
 
 .stationName {
 	display: block;
-	font-size: 40px;
+	font-size: 50px;
 	margin: 5px;
 	word-break: keep-all;
 }
 
 .timeTo {
-	font-size: 26px;
+	font-size: 30px;
 	flex: initial;
 }
 .info {
 	flex: auto;
+	font-size: 20px;
 }
 
 .bus,
@@ -32,7 +33,7 @@ li[id^='u'] {
 	padding: 15px;
 	margin: 0px;
 	border-bottom: 2px solid rgba(0, 0, 0, 0.25);
-	height: 40px;
+	height: 50px;
 	display: flex;
 	flex-direction: row;
 	align-items: center;
