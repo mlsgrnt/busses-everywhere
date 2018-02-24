@@ -11,14 +11,15 @@
 	display: block;
 	font-size: 50px;
 	margin: 5px;
-	word-break: keep-all;
+	word-wrap: normal;
+	word-break: break-all;
 }
 
 .timeTo {
 	font-size: 30px;
 	flex: initial;
 	max-width: 70px;
-	min-width: 35px;
+	min-width: 60px;
 	text-align: center;
 }
 .info {

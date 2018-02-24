@@ -15,11 +15,19 @@ class App extends Component {
 		super();
 
 		this.state = {
-			station: { name: '' },
+			station: { name: 'Locating' },
 			arrivals: undefined,
 			filteredArrivals: undefined
 		};
 	}
+
+	componentDidUpdate = (prevProps, prevState) => {
+		if (this.state.station !== prevState.station) {
+			this.setState({
+				filteredArrivals: undefined
+			});
+		}
+	};
 
 	getArrivals = async station => {
 		//preapre for next time
