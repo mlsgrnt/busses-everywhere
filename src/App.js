@@ -16,7 +16,6 @@ class App extends Component {
 
 		this.state = {
 			station: { name: '' },
-			directionMode: false,
 			arrivals: undefined,
 			filteredArrivals: undefined
 		};
@@ -111,8 +110,7 @@ class App extends Component {
 			filteredArrivals = this.state.arrivals;
 		}
 		this.setState({
-			filteredArrivals,
-			directionMode: 'debug'
+			filteredArrivals
 		});
 	};
 
@@ -121,7 +119,6 @@ class App extends Component {
 			<div className="container">
 				<div>
 					<h1 className="stationName">{this.state.station.name}</h1>
-					<span>{this.state.directionMode.toString()}</span>
 
 					<Arrivals arrivals={this.state.filteredArrivals} />
 				</div>
