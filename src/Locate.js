@@ -7,8 +7,7 @@ class Locate extends Component {
 
 		this.state = {
 			loading: false,
-			position: { coords: { latitude: 0, longitude: 0 } },
-			facing: undefined
+			position: { coords: { latitude: 0, longitude: 0 } }
 		};
 	}
 
@@ -18,7 +17,14 @@ class Locate extends Component {
 			longitude: position.coords.longitude
 		});
 
-		this.props.handleStation(await nearby);
+		const nextStation = this.state.directionalPosition
+			? vbb.nearby({
+					latitude: this.state.directionalPosition.latitude,
+					longitude: this.state.directionalPosition.longitude
+				})
+			: undefined;
+
+		this.props.handleStation(await nearby, await nextStation);
 
 		this.setState({
 			loading: true
@@ -55,25 +61,28 @@ class Locate extends Component {
 		});
 
 		this.getPosition();
-	};
-
-	componentWillUpdate = (newProps, newState) => {
-		if (newState.facing !== this.state.facing) {
+		setInterval(() => {
 			this.findStop(this.state.position);
-		}
+		}, 5000);
 	};
 
 	handleCompassData = heading => {
-		if (heading > 0 && heading <= 180) {
-			this.setState({
-				facing: 'north'
-			});
-		}
-		if (heading > 181) {
-			this.setState({
-				facing: 'south'
-			});
-		}
+		const goNorth = Math.sin(heading * (Math.PI / 180)) * 0.0001;
+		const goEast = Math.cos(heading * (Math.PI / 180)) * 0.0001;
+
+		const directionalLatitude =
+			this.state.position.coords.latitude +
+			this.state.position.coords.latitude * goEast;
+		const directionalLongitude =
+			this.state.position.coords.longitude +
+			this.state.position.coords.longitude * goNorth;
+
+		this.setState({
+			directionalPosition: {
+				longitude: directionalLongitude,
+				latitude: directionalLatitude
+			}
+		});
 	};
 
 	render() {

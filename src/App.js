@@ -14,6 +14,7 @@ class App extends Component {
 
 		this.state = {
 			station: { name: '' },
+			nextStation: { name: '' },
 			arrivals: undefined
 		};
 	}
@@ -38,7 +39,14 @@ class App extends Component {
 		});
 	};
 
-	handleStation = nearestStations => {
+	handleStation = (nearestStations, nextStations) => {
+		if (nextStations && nextStations[0]) {
+			console.log(nextStations[0]);
+			this.setState({
+				nextStation: nextStations[0]
+			});
+		}
+
 		if (!nearestStations[0]) {
 			this.setState({
 				station: { name: "it's all gone to shit" }
@@ -56,7 +64,10 @@ class App extends Component {
 		return (
 			<div className="container">
 				<div>
-					<h1 className="stationName">{this.state.station.name}</h1>
+					<h1 className="stationName">
+						{this.state.station.name} to {this.state.nextStation.name}
+					</h1>
+
 					<Arrivals arrivals={this.state.arrivals} />
 				</div>
 				<Locate handleStation={this.handleStation} />
