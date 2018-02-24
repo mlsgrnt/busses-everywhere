@@ -27,6 +27,14 @@ class App extends Component {
 			this.getArrivals(this.state.station);
 		}, 30000);
 
+		//populate quicly if first loading
+		if (!this.state.arrivals) {
+			this.setState({
+				arrivals: await vbb.departures(station.id)
+			});
+		}
+
+		//let the rest sink in
 		const arrivals = await vbb.departures(station.id, {
 			duration: 120,
 			results: 10

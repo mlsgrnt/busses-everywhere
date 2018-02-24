@@ -11,10 +11,10 @@ class Locate extends Component {
 		};
 	}
 
-	findStop = async position => {
+	findStop = async () => {
 		const nearby = vbb.nearby({
-			latitude: position.coords.latitude,
-			longitude: position.coords.longitude
+			latitude: this.state.position.coords.latitude,
+			longitude: this.state.position.coords.longitude
 		});
 
 		this.props.handleStation(await nearby);
@@ -38,7 +38,7 @@ class Locate extends Component {
 					this.setState({
 						position
 					});
-					this.findStop(position);
+					this.findStop();
 				}
 			},
 			error => {
