@@ -90,7 +90,7 @@ class App extends Component {
 
 			const score = (tan - oa) / tan * 100;
 
-			console.log(
+			/*console.log(
 				direction,
 				'with scores',
 				oa,
@@ -98,7 +98,7 @@ class App extends Component {
 				score,
 				'at direction',
 				heading
-			);
+			);*/
 
 			if (Math.abs(score) < 100) {
 				//100% error seems to be sweet spot
