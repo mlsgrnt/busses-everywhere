@@ -51,44 +51,28 @@ class Locate extends Component {
 
 	componentDidMount = () => {
 		window.addEventListener('deviceorientation', orientation => {
-			this.handleCompassData(orientation.webkitCompassHeading);
+			this.setState({
+				orientation: orientation
+			});
 		});
 
 		this.getPosition();
 
-		//TEMP TODO FIX
-		//this should look for big changes...somehow?
-		//because the compass takes a second to spin up
-		setInterval(async () => {
-			if (this.state.directionalPosition !== undefined) {
-				this.props.handleDirectionChange(
-					await vbb.nearby({
-						latitude: this.state.directionalPosition.latitude,
-						longitude: this.state.directionalPosition.longitude,
-						results: 1
-					})
-				);
+		//wait for compass to heat up
+		setTimeout(() => {
+			if (this.state.orientation) {
+				setInterval(this.handleCompassData, 1500);
 			}
-		}, 1500);
+		}, 250);
 	};
 
-	handleCompassData = heading => {
-		const goNorth = Math.sin(heading * (Math.PI / 180)) * 0.0001;
-		const goEast = Math.cos(heading * (Math.PI / 180)) * 0.0001;
+	handleCompassData = () => {
+		const heading = this.state.orientation.webkitCompassHeading;
 
-		const directionalLatitude =
-			this.state.position.coords.latitude +
-			this.state.position.coords.latitude * goEast;
-		const directionalLongitude =
-			this.state.position.coords.longitude +
-			this.state.position.coords.longitude * goNorth;
+		const northThresh = Math.sin(heading * (Math.PI / 180));
+		const eastThresh = Math.cos(heading * (Math.PI / 180));
 
-		this.setState({
-			directionalPosition: {
-				longitude: directionalLongitude,
-				latitude: directionalLatitude
-			}
-		});
+		this.props.handleDirectionChange(heading, this.state.position.coords);
 	};
 
 	render() {

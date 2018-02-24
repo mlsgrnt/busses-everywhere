@@ -3028,6 +3028,10 @@ he@1.1.x:
   version "1.1.1"
   resolved "https://registry.yarnpkg.com/he/-/he-1.1.1.tgz#93410fd21b009735151f8868c2f271f3427e23fd"
 
+hifo@^0.7.0:
+  version "0.7.0"
+  resolved "https://registry.yarnpkg.com/hifo/-/hifo-0.7.0.tgz#6f906356b9a06f4ba888f8749fa7f48cf0eac5e3"
+
 hmac-drbg@^1.0.0:
   version "1.0.1"
   resolved "https://registry.yarnpkg.com/hmac-drbg/-/hmac-drbg-1.0.1.tgz#d2745701025a6c775a6c545793ed502fc0c649a1"
@@ -4041,6 +4045,10 @@ lodash.defaults@^4.2.0:
   version "4.2.0"
   resolved "https://registry.yarnpkg.com/lodash.defaults/-/lodash.defaults-4.2.0.tgz#d09178716ffea4dde9e5fb7b37f6f0802274580c"
 
+lodash.get@^4.4.2:
+  version "4.4.2"
+  resolved "https://registry.yarnpkg.com/lodash.get/-/lodash.get-4.4.2.tgz#2d177f652fa31e939b4438d5341499dfa3825e99"
+
 lodash.memoize@^4.1.2:
   version "4.1.2"
   resolved "https://registry.yarnpkg.com/lodash.memoize/-/lodash.memoize-4.1.2.tgz#bcc6c49a42a2840ed997f323eada5ecd182e0bfe"
@@ -4415,6 +4423,10 @@ nopt@^4.0.1:
   dependencies:
     abbrev "1"
     osenv "^0.1.4"
+
+normalize-for-search@^2.0.1:
+  version "2.0.1"
+  resolved "https://registry.yarnpkg.com/normalize-for-search/-/normalize-for-search-2.0.1.tgz#0cb26ee39b57b1c71106e184b693a3bb49f42ad2"
 
 normalize-package-data@^2.3.2, normalize-package-data@^2.3.4:
   version "2.4.0"
@@ -6170,6 +6182,13 @@ symbol-tree@^3.2.1:
   version "3.2.2"
   resolved "https://registry.yarnpkg.com/symbol-tree/-/symbol-tree-3.2.2.tgz#ae27db38f660a7ae2e1c3b7d1bc290819b8519e6"
 
+synchronous-autocomplete@^2.0.0:
+  version "2.1.1"
+  resolved "https://registry.yarnpkg.com/synchronous-autocomplete/-/synchronous-autocomplete-2.1.1.tgz#2e856796490ae529cab7afb8145ea9b81d8c2c7d"
+  dependencies:
+    hifo "^0.7.0"
+    leven "^2.1.0"
+
 table@^4.0.1:
   version "4.0.3"
   resolved "https://registry.yarnpkg.com/table/-/table-4.0.3.tgz#00b5e2b602f1794b9acaf9ca908a76386a7813bc"
@@ -6503,6 +6522,25 @@ vary@~1.1.2:
     fetch-ponyfill "^4.0.0"
     ndjson "^1.4.3"
     pinkie-promise "^2.0.1"
+
+vbb-stations-autocomplete@^3.2.0:
+  version "3.2.0"
+  resolved "https://registry.yarnpkg.com/vbb-stations-autocomplete/-/vbb-stations-autocomplete-3.2.0.tgz#a9e142fc5c6e12cf6d7aa9f5b2a9a595572c82c2"
+  dependencies:
+    synchronous-autocomplete "^2.0.0"
+    vbb-tokenize-station "^0.3.0"
+
+vbb-stations@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/vbb-stations/-/vbb-stations-6.2.1.tgz#8988b975a01a4caa7fbb92debac6202757d74ed4"
+  dependencies:
+    lodash.get "^4.4.2"
+
+vbb-tokenize-station@^0.3.0:
+  version "0.3.0"
+  resolved "https://registry.yarnpkg.com/vbb-tokenize-station/-/vbb-tokenize-station-0.3.0.tgz#54213496af855595a45d3b4f67cb4143c973f8a1"
+  dependencies:
+    normalize-for-search "^2.0.1"
 
 vendors@^1.0.0:
   version "1.0.1"

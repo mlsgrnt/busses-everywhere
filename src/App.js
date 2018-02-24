@@ -2,6 +2,8 @@ import React, { Component } from 'react';
 import './App.css';
 
 import vbb from 'vbb-client';
+import stations from 'vbb-stations';
+import autocomplete from 'vbb-stations-autocomplete';
 
 import Locate from './Locate';
 import Arrivals from './Arrivals';
@@ -15,7 +17,8 @@ class App extends Component {
 		this.state = {
 			station: { name: '' },
 			directionMode: false,
-			arrivals: undefined
+			arrivals: undefined,
+			filteredArrivals: undefined
 		};
 	}
 
@@ -41,7 +44,8 @@ class App extends Component {
 		});
 
 		this.setState({
-			arrivals: arrivals
+			arrivals: arrivals,
+			filteredArrivals: arrivals
 		});
 	};
 
@@ -59,34 +63,58 @@ class App extends Component {
 		this.getArrivals(this.state.station);
 	};
 
-	handleDirectionChange = async nextStations => {
-		const nextStation = nextStations[0];
-		if (nextStation.id) {
-			/*
-			console.log(
-				await vbb.departures(this.state.station.id, {
-					nextStation: nextStation.id
-				})
-			);
-*/
-			const potentialJourney = await vbb.journeys(
-				this.state.station.id,
-				nextStation.id
-			);
+	handleDirectionChange = async (heading, position) => {
+		console.log('got the dataaa', this.state.arrivals.length);
 
-			const ourDirection = await potentialJourney[0].legs[0].direction;
+		let filteredArrivals = [];
+		const arrivals = this.state.arrivals;
 
-			const arrivals = this.state.arrivals;
-			for (let i in arrivals) {
-				if (arrivals[i].direction !== ourDirection) {
-					delete arrivals[i];
-				}
+		for (let i in arrivals) {
+			let direction = arrivals[i].direction;
+			if (direction.split(', ')[1] !== undefined) {
+				//if the destiantion has weird commas in it!
+				direction = direction.split(', ')[1];
 			}
-			this.setState({
-				filteredArrivals: arrivals,
-				directionMode: 'debug' + nextStation.name
-			});
+
+			const destination = await stations(
+				autocomplete(direction, 1, false, false)[0].id
+			);
+
+			const locationDifference = {
+				updown: destination[0].location.longitude - position.longitude,
+				leftright: destination[0].location.latitude - position.latitude
+			};
+
+			const oa = locationDifference.updown / locationDifference.leftright;
+			const tan = Math.tan(heading * Math.PI / 180);
+
+			const score = (tan - oa) / tan * 100;
+
+			/*console.log(
+				direction,
+				'with scores',
+				oa,
+				tan,
+				score,
+				'at direction',
+				heading
+			); */
+
+			if (Math.abs(score) < 100) {
+				//100% error seems to be sweet spot
+				filteredArrivals.push(arrivals[i]);
+			}
 		}
+
+		if (filteredArrivals && filteredArrivals.length === 0) {
+			//whoopsie hehe
+			filteredArrivals = this.state.arrivals;
+		}
+		console.log(this.state.arrivals.length, arrivals.length);
+		this.setState({
+			filteredArrivals,
+			directionMode: 'debug'
+		});
 	};
 
 	render() {
@@ -96,13 +124,7 @@ class App extends Component {
 					<h1 className="stationName">{this.state.station.name}</h1>
 					<span>{this.state.directionMode.toString()}</span>
 
-					<Arrivals
-						arrivals={
-							this.state.filteredArrivals
-								? this.state.filteredArrivals
-								: this.state.arrivals
-						}
-					/>
+					<Arrivals arrivals={this.state.filteredArrivals} />
 				</div>
 				<Locate
 					handleStation={this.handleStation}
