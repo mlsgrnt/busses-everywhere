@@ -74,7 +74,7 @@ class App extends Component {
 				nextStation.id
 			);
 
-			const ourDirection = potentialJourney[0].legs[0].direction;
+			const ourDirection = await potentialJourney[0].legs[0].direction;
 
 			const arrivals = this.state.arrivals;
 			for (let i in arrivals) {
