@@ -34,7 +34,7 @@ class App extends Component {
 			});
 		}
 
-		//let the rest sink in
+		//let the rest trickle in
 		const arrivals = await vbb.departures(station.id, {
 			duration: 120,
 			results: 10
