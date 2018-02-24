@@ -66,7 +66,7 @@ class Locate extends Component {
 					})
 				);
 			}
-		}, 5000);
+		}, 1500);
 	};
 
 	handleCompassData = heading => {
