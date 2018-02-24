@@ -26,7 +26,10 @@ class App extends Component {
 			this.getArrivals(this.state.station);
 		}, 30000);
 
-		const arrivals = await vbb.departures(station.id);
+		const arrivals = await vbb.departures(station.id, {
+			duration: 120,
+			results: 10
+		});
 
 		//somehow filter arrivlas here?!
 
