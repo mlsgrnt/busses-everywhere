@@ -68,8 +68,8 @@ class Locate extends Component {
 	};
 
 	handleCompassData = heading => {
-		const goNorth = Math.cos(heading * (Math.PI / 180)) * 0.0001;
-		const goEast = Math.sin(heading * (Math.PI / 180)) * 0.0001;
+		const goNorth = Math.sin(heading * (Math.PI / 180)) * 0.0001;
+		const goEast = Math.cos(heading * (Math.PI / 180)) * 0.0001;
 
 		const directionalLatitude =
 			this.state.position.coords.latitude +
