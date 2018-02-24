@@ -24,6 +24,13 @@ class Locate extends Component {
 				})
 			: undefined;
 
+		//if Nextstatino existed, that means we have compassdata and should update regularly
+		if (nextStation !== undefined) {
+			setTimeout(() => {
+				this.findStop(this.state.position);
+			}, 3000);
+		}
+
 		this.props.handleStation(await nearby, await nextStation);
 
 		this.setState({
@@ -60,11 +67,12 @@ class Locate extends Component {
 			this.handleCompassData(orientation.webkitCompassHeading);
 		});
 
+		//TEMP TODO FIX
+		//because the compass takes a second to spin up
 		this.getPosition();
-		setInterval(() => {
-			console.log(this.state);
+		setTimeout(() => {
 			this.findStop(this.state.position);
-		}, 5000);
+		}, 1000);
 	};
 
 	handleCompassData = heading => {

@@ -33,7 +33,18 @@ class App extends Component {
 		});
 
 		//somehow filter arrivlas here?!
-
+		if (this.state.nextStation.id) {
+			const potentialJourney = await vbb.journeys(
+				station.id,
+				this.state.nextStation.id
+			);
+			const ourDirection = potentialJourney[0].legs[0].direction;
+			for (let i in arrivals) {
+				if (arrivals[i].direction !== ourDirection) {
+					delete arrivals[i];
+				}
+			}
+		}
 		this.setState({
 			arrivals: arrivals
 		});
@@ -41,7 +52,6 @@ class App extends Component {
 
 	handleStation = (nearestStations, nextStations) => {
 		if (nextStations && nextStations[0]) {
-			console.log(nextStations[0]);
 			this.setState({
 				nextStation: nextStations[0]
 			});
@@ -64,9 +74,8 @@ class App extends Component {
 		return (
 			<div className="container">
 				<div>
-					<h1 className="stationName">
-						{this.state.station.name} to {this.state.nextStation.name}
-					</h1>
+					<h1 className="stationName">{this.state.station.name}</h1>
+					<span>{this.state.nextStation.name}</span>
 
 					<Arrivals arrivals={this.state.arrivals} />
 				</div>
