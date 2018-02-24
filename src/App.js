@@ -22,11 +22,11 @@ class App extends Component {
 	}
 
 	componentDidUpdate = (prevProps, prevState) => {
-		if (this.state.station !== prevState.station) {
+		/*if (this.state.station !== prevState.station) {
 			this.setState({
 				filteredArrivals: undefined
 			});
-		}
+		}*/
 	};
 
 	getArrivals = async station => {
