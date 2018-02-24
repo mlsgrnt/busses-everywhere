@@ -7,11 +7,12 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-scripts": "1.1.1",
+		"serve": "^6.4.11",
 		"vbb-client": "https://github.com/blydro/vbb-client"
 	},
 	"scripts": {
 		"start": "react-scripts start",
-		"someday-now-start": "serve -s build",
+		"now-start": "serve -s build",
 		"build": "react-scripts build",
 		"test": "react-scripts test --env=jsdom",
 		"eject": "react-scripts eject"
