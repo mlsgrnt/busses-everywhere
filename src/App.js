@@ -55,10 +55,19 @@ class App extends Component {
 		const nextStation = nextStations[0];
 		//somehow filter arrivlas here?!
 		if (nextStation.id) {
-			const potentialJourney = await vbb.journeys(
-				this.state.station.id,
-				nextStation.id
-			);
+			let potentialJourney;
+			if (this.state.potentialJourney) {
+				potentialJourney = this.state.potentialJourney;
+			} else {
+				potentialJourney = await vbb.journeys(
+					this.state.station.id,
+					nextStation.id
+				);
+				this.setState({
+					potentialJourney
+				});
+			}
+
 			const ourDirection = potentialJourney[0].legs[0].direction;
 
 			const arrivals = this.state.arrivals;
@@ -69,7 +78,7 @@ class App extends Component {
 			}
 			this.setState({
 				filteredArrivals: arrivals,
-				directionMode: 'debug' + ourDirection
+				directionMode: 'debug' + nextStation.name
 			});
 		}
 	};
