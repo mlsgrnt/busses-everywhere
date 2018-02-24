@@ -55,18 +55,10 @@ class App extends Component {
 		const nextStation = nextStations[0];
 		//somehow filter arrivlas here?!
 		if (nextStation.id) {
-			let potentialJourney;
-			if (this.state.potentialJourney) {
-				potentialJourney = this.state.potentialJourney;
-			} else {
-				potentialJourney = await vbb.journeys(
-					this.state.station.id,
-					nextStation.id
-				);
-				this.setState({
-					potentialJourney
-				});
-			}
+			const potentialJourney = await vbb.journeys(
+				this.state.station.id,
+				nextStation.id
+			);
 
 			const ourDirection = potentialJourney[0].legs[0].direction;
 
