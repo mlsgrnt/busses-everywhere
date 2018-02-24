@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import { distanceInWords } from 'date-fns';
+import { differenceInMinutes } from 'date-fns';
 
 class Arrivals extends Component {
 	render() {
@@ -11,11 +11,15 @@ class Arrivals extends Component {
 				id={arrival.line.id}
 			>
 				<span className="info">
-					{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')}{' '}
+					<strong>
+						{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')}
+					</strong>{' '}
 					{arrival.direction}
 				</span>
 				<strong className="timeTo">
-					{distanceInWords(arrival.when, new Date())}
+					{differenceInMinutes(arrival.when, new Date()) === 0
+						? 'now'
+						: differenceInMinutes(arrival.when, new Date())}
 				</strong>
 			</li>
 		));

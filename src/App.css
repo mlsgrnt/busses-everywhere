@@ -15,11 +15,11 @@
 }
 
 .timeTo {
-	float: right;
+	font-size: 26px;
+	flex: initial;
 }
 .info {
-	max-width: 55vw;
-	display: inline-block;
+	flex: auto;
 }
 
 .bus,
@@ -33,6 +33,10 @@ li[id^='u'] {
 	margin: 0px;
 	border: 0.1px solid rgba(0, 0, 0, 0.25);
 	height: 40px;
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: flex-end;
 }
 
 .bus {
