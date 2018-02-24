@@ -69,9 +69,6 @@ class Locate extends Component {
 	handleCompassData = () => {
 		const heading = this.state.orientation.webkitCompassHeading;
 
-		const northThresh = Math.sin(heading * (Math.PI / 180));
-		const eastThresh = Math.cos(heading * (Math.PI / 180));
-
 		this.props.handleDirectionChange(heading, this.state.position.coords);
 	};
 
