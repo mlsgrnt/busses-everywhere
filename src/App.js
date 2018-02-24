@@ -53,8 +53,8 @@ class App extends Component {
 
 	handleDirectionChange = async nextStations => {
 		const nextStation = nextStations[0];
-	/*	//somehow filter arrivlas here?!
 		if (nextStation.id) {
+			/*
 			console.log(
 				await vbb.departures(this.state.station.id, {
 					nextStation: nextStation.id
