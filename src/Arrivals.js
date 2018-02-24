@@ -1,12 +1,15 @@
 import React, { Component } from 'react';
 
-import { differenceInMinutes } from 'date-fns';
+import { differenceInMinutes, differenceInSeconds } from 'date-fns';
 
 class Arrivals extends Component {
 	render() {
-		const renderMinutes = differential => {
+		const renderMinutes = arrivalTime => {
+			const differential = differenceInMinutes(arrivalTime, new Date());
+
 			if (differential === 0) {
-				return 'now';
+				return 'now'; //TODO: seconds?
+				//return Math.abs(differenceInSeconds(arrivalTime, new Date()));
 			}
 			if (differential < 0) {
 				return 'here';
@@ -27,9 +30,7 @@ class Arrivals extends Component {
 					</strong>{' '}
 					{arrival.direction}
 				</span>
-				<strong className="timeTo">
-					{renderMinutes(differenceInMinutes(arrival.when, new Date()))}
-				</strong>
+				<strong className="timeTo">{renderMinutes(arrival.when)}</strong>
 			</li>
 		));
 
