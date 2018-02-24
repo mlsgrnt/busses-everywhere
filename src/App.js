@@ -36,6 +36,12 @@ class App extends Component {
 	};
 
 	handleStation = nearestStations => {
+		if (!nearestStations[0]) {
+			this.setState({
+				station: { name: "it's all gone to shit" }
+			});
+			return;
+		}
 		this.setState({
 			station: nearestStations[0]
 		});
