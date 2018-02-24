@@ -57,6 +57,7 @@ class Locate extends Component {
 		this.getPosition();
 
 		//TEMP TODO FIX
+		//this should look for big changes...somehow?
 		//because the compass takes a second to spin up
 		setInterval(async () => {
 			if (this.state.directionalPosition !== undefined) {
