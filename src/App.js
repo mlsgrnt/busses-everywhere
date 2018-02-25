@@ -71,8 +71,6 @@ class App extends Component {
 	};
 
 	handleDirectionChange = async (heading, position) => {
-		console.log('got the dataaa', this.state.arrivals.length);
-
 		let filteredArrivals = [];
 		const arrivals = this.state.arrivals;
 

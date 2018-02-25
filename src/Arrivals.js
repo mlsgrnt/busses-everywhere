@@ -18,6 +18,15 @@ class Arrivals extends Component {
 			return differential;
 		};
 
+		const renderDirection = direction => {
+			if (direction.split(', ')[1] !== undefined) {
+				//if the destiantion has weird commas in it!
+				direction = direction.split(', ')[1];
+			}
+
+			return direction;
+		};
+
 		const renderedArrivals = this.props.arrivals.map(arrival => (
 			<li
 				key={arrival.journeyId}
@@ -28,7 +37,7 @@ class Arrivals extends Component {
 					<strong>
 						{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')}
 					</strong>{' '}
-					{arrival.direction}
+					{renderDirection(arrival.direction)}
 				</span>
 				<strong className="timeTo">{renderMinutes(arrival.when)}</strong>
 			</li>
