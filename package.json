@@ -7,15 +7,15 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-scripts": "1.1.1",
-		"vbb-client": "https://github.com/blydro/vbb-client",
-		"vbb-stations": "https://github.com/blydro/vbb-stations",
+		"vbb-client": "^3.0.1",
+		"vbb-stations": "^6.2.1",
 		"vbb-stations-autocomplete": "^3.2.0",
 		"victor": "^1.1.0"
 	},
 	"scripts": {
 		"start": "react-scripts start",
 		"now-start": "serve -s build",
-		"now-build": "cd node_modules/vbb-stations/ && npm i && npm run build && cd ../.. && cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && npm run build",
+		"now-build": "cd node_modules/vbb-stations/ && npm i && npm run build && cd ../.. && cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && npx babel-cli --presets es2015 vbb-stations --out-dir vbb-stations && npx babel-cli --presets es2015 vbb-client --out-dir vbb-client && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && npm run build",
 		"build": "react-scripts build",
 		"surge": "react-scripts build && cd build && surge",
 		"test": "react-scripts test --env=jsdom",

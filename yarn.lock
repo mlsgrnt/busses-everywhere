@@ -6599,9 +6599,9 @@ vary@~1.1.2:
   version "1.1.2"
   resolved "https://registry.yarnpkg.com/vary/-/vary-1.1.2.tgz#2299f02c6ded30d4a5961b0b9f74524a18f634fc"
 
-"vbb-client@https://github.com/blydro/vbb-client":
-  version "3.0.4"
-  resolved "https://github.com/blydro/vbb-client#e07042ac951aaa7dac656d29d5c42bc4e264c2d7"
+vbb-client@^3.0.1:
+  version "3.0.1"
+  resolved "https://registry.yarnpkg.com/vbb-client/-/vbb-client-3.0.1.tgz#4d77fa040abaf466b0bf85c95abcc69b050b8712"
   dependencies:
     fetch-ponyfill "^4.0.0"
     ndjson "^1.4.3"
@@ -6614,9 +6614,9 @@ vbb-stations-autocomplete@^3.2.0:
     synchronous-autocomplete "^2.0.0"
     vbb-tokenize-station "^0.3.0"
 
-"vbb-stations@https://github.com/blydro/vbb-stations":
-  version "6.2.2"
-  resolved "https://github.com/blydro/vbb-stations#324caa25faa55772b760e92df89148eb4dc92f10"
+vbb-stations@^6.2.1:
+  version "6.2.1"
+  resolved "https://registry.yarnpkg.com/vbb-stations/-/vbb-stations-6.2.1.tgz#8988b975a01a4caa7fbb92debac6202757d74ed4"
   dependencies:
     lodash.get "^4.4.2"
 
