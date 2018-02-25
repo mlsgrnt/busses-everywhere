@@ -1,13 +1,16 @@
 .App {
 	text-align: left;
 	color: white;
-
-	transition: all 0.3s ease-in-out;
 }
 
 .blur {
+	transition-delay: 0.2s;
+	transition: filter 0.2s ease-in;
+	filter: blur(0px);
+}
+
+.blur.true {
 	filter: blur(5px);
-	transition: filter 0.3s ease-in-out;
 }
 
 .loading {
@@ -40,6 +43,7 @@
 .suburban,
 .ferry,
 .regional,
+.express,
 li[id^='u'] {
 	padding: 15px;
 	margin: 0px;
@@ -152,4 +156,8 @@ li[id^='bus-m'] {
 }
 #s9 {
 	background-color: #8a0e30;
+}
+
+#locomore {
+	background-color: pink;
 }

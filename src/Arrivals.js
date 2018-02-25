@@ -37,7 +37,7 @@ class Arrivals extends Component {
 
 		return (
 			<div className="App">
-				<ul className={this.props.loading ? 'blur' : ''}>{renderedArrivals}</ul>
+				<ul className={'blur ' + this.props.loading}>{renderedArrivals}</ul>
 			</div>
 		);
 	}

@@ -19,11 +19,20 @@ class App extends Component {
 		this.state = {
 			station: { name: 'Locating' },
 			arrivals: undefined,
-			filteredArrivals: undefined
+			filteredArrivals: localStorage.getItem('staleArrivals')
+				? JSON.parse(localStorage.getItem('staleArrivals'))
+				: undefined,
+			loading: true
 		};
 	}
 
-	componentDidUpdate = (prevProps, prevState) => {};
+	componentDidUpdate = (prevProps, prevState) => {
+		if (prevState.station.name !== this.state.station.name) {
+			this.setState({
+				loading: true
+			});
+		}
+	};
 
 	getArrivals = async station => {
 		//preapre for next time
@@ -34,23 +43,29 @@ class App extends Component {
 		}, 15000);
 
 		//populate quicly if first loading
-		//nah.
-		/*
+
 		if (!this.state.arrivals) {
 			this.setState({
-				arrivals: await vbb.departures(station.id)
+				arrivals: await vbb.departures(station.id),
+				loading: false
 			});
 		}
-		*/
+
 		//let the rest trickle in
 		const arrivals = await vbb.departures(station.id, {
 			duration: 120,
 			results: 10
 		});
 
+		localStorage.setItem(
+			'staleArrivals',
+			JSON.stringify(arrivals.slice(0, 10))
+		);
+
 		this.setState({
 			arrivals: arrivals,
-			filteredArrivals: arrivals
+			filteredArrivals: arrivals,
+			loading: false
 		});
 	};
 
