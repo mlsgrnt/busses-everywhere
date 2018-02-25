@@ -35,7 +35,7 @@ class App extends Component {
 		clearTimeout(updateTimeout);
 		updateTimeout = setTimeout(() => {
 			this.getArrivals(this.state.station);
-		}, 30000);
+		}, 15000);
 
 		//populate quicly if first loading
 		if (!this.state.arrivals) {
