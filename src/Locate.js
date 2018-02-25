@@ -7,6 +7,7 @@ class Locate extends Component {
 
 		this.state = {
 			loading: false,
+			compassActivated: true,
 			position: { coords: { latitude: 0, longitude: 0 } }
 		};
 	}
@@ -67,25 +68,27 @@ class Locate extends Component {
 	};
 
 	handleCompassData = () => {
-		const heading = this.state.orientation.webkitCompassHeading;
+		this.props.handleDirectionChange(
+			this.state.orientation.webkitCompassHeading,
+			this.state.position.coords,
+			this.state.compassActivated
+		);
+	};
 
-		this.props.handleDirectionChange(heading, this.state.position.coords);
+	handleTap = e => {
+		e.preventDefault();
+
+		this.setState(previousState => {
+			return { compassActivated: !previousState.compassActivated };
+		}, this.handleCompassData); //change right away
 	};
 
 	render() {
 		return (
-			<span className="App">
-				{this.state.loading ? (
-					<span className="loading" />
-				) : (
-					<span>
-						loading the loading
-						{/*<button onClick={() => this.getPosition()}>
-							Click Me If Chrome is being shitty
-						</button>*/}
-					</span>
-				)}
-			</span>
+			<span
+				className={'locateTouchRegion ' + !this.state.compassActivated}
+				onClick={this.handleTap}
+			/>
 		);
 	}
 }

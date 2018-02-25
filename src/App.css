@@ -3,6 +3,20 @@
 	color: white;
 }
 
+.locateTouchRegion {
+	height: 70px;
+	width: 100vw;
+	z-index: 5;
+	position: absolute;
+	right: 0;
+	top: 0;
+	opacity: 0.25;
+	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+.locateTouchRegion.true {
+	background: #f0d722;
+}
+
 .blur {
 	transition-delay: 0.2s;
 	transition: filter 0.2s ease-in;

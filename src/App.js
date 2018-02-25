@@ -86,7 +86,16 @@ class App extends Component {
 		this.getArrivals(this.state.station);
 	};
 
-	handleDirectionChange = async (heading, position) => {
+	handleDirectionChange = async (heading, position, compassActivated) => {
+		if (!compassActivated) {
+			//to fully disable
+			if (this.state.filteredArrivals !== this.state.arrivals) {
+				this.setState({
+					filteredArrivals: this.state.arrivals
+				});
+			}
+			return;
+		}
 		let filteredArrivals = [];
 		const arrivals = this.state.arrivals;
 
@@ -144,6 +153,10 @@ class App extends Component {
 		return (
 			<div className="container">
 				<div>
+					<Locate
+						handleStation={this.handleStation}
+						handleDirectionChange={this.handleDirectionChange}
+					/>
 					<h1 className="stationName">
 						{cleanStationName(this.state.station.name)}
 					</h1>
@@ -153,10 +166,6 @@ class App extends Component {
 						loading={this.state.loading}
 					/>
 				</div>
-				<Locate
-					handleStation={this.handleStation}
-					handleDirectionChange={this.handleDirectionChange}
-				/>
 			</div>
 		);
 	}
