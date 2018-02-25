@@ -59,7 +59,10 @@ class App extends Component {
 	handleStation = nearestStations => {
 		if (!nearestStations[0]) {
 			this.setState({
-				station: { name: "it's all gone to shit" }
+				station: {
+					name:
+						"You're not in Berlin. This error message has prevented a crash."
+				}
 			});
 			return;
 		}
