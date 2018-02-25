@@ -15,5 +15,13 @@ export default function(direction) {
 		direction = direction.split('U ')[1];
 	}
 
+	//make ringbahn nice (remove the line number)
+	if (direction.split('S41')[1] !== undefined) {
+		direction = direction.split('S41')[0] + direction.split('S41')[1];
+	}
+	if (direction.split('S42')[1] !== undefined) {
+		direction = direction.split('S42')[0] + direction.split('S42')[1];
+	}
+
 	return direction;
 }
