@@ -42,6 +42,8 @@ li[id^='u'] {
 	flex-direction: row;
 	align-items: center;
 	justify-content: flex-end;
+
+	text-shadow: 1px 1px rgba(10, 10, 10, 0.2);
 }
 
 .bus {
