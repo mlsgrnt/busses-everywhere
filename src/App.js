@@ -110,6 +110,13 @@ class App extends Component {
 				autocomplete(direction, 1, false, false)[0].id
 			);
 
+			if (destination === undefined) {
+				//we can't find the destination. let's add it just to be safe
+				//TODO: in the future look at the next stop of this line! --> use stations.nextStop to figure it out --> the "fallback algorithm"
+				filteredArrivals.push(arrivals[i]);
+				continue;
+			}
+
 			const me = new victor(position.latitude, position.longitude);
 			const you = new victor(
 				destination[0].location.latitude,
