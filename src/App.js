@@ -4,6 +4,7 @@ import './App.css';
 import vbb from 'vbb-client';
 import stations from 'vbb-stations';
 import autocomplete from 'vbb-stations-autocomplete';
+import victor from 'victor';
 
 import Locate from './Locate';
 import Arrivals from './Arrivals';
@@ -88,28 +89,28 @@ class App extends Component {
 				autocomplete(direction, 1, false, false)[0].id
 			);
 
-			const locationDifference = {
-				updown: destination[0].location.longitude - position.longitude,
-				leftright: destination[0].location.latitude - position.latitude
-			};
+			const me = new victor(position.latitude, position.longitude);
+			const you = new victor(
+				destination[0].location.latitude,
+				destination[0].location.longitude
+			);
 
-			const oa = locationDifference.updown / locationDifference.leftright;
-			const tan = Math.cos(heading * Math.PI / 180);
+			const us = you.subtract(me);
 
-			const score = (tan - oa) / tan * 100;
+			const score = Math.abs(heading - us.horizontalAngleDeg()) / heading * 100; //margin of error! between "actual" angle and calculated angle
 
 			/*console.log(
 				direction,
 				'with scores',
-				oa,
-				tan,
 				score,
+				'with vectorAngle',
+				us.horizontalAngleDeg(),
 				'at direction',
 				heading
 			);*/
 
-			if (Math.abs(score) < 100) {
-				//100% error seems to be sweet spot
+			if (Math.abs(score) < 45) {
+				//45% error seems to be sweet spot
 				filteredArrivals.push(arrivals[i]);
 			}
 		}
