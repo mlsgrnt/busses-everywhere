@@ -6,3 +6,8 @@ import registerServiceWorker from './registerServiceWorker';
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
+
+//prevent zoom
+document.addEventListener('gesturestart', function(e) {
+	e.preventDefault();
+});
