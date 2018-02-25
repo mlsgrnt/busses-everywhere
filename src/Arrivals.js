@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 
 import { differenceInMinutes, differenceInSeconds } from 'date-fns';
+import cleanStationName from './cleanStationName';
 
 class Arrivals extends Component {
 	render() {
@@ -18,26 +19,6 @@ class Arrivals extends Component {
 			return differential;
 		};
 
-		const renderDirection = direction => {
-			if (
-				direction.split(', ')[1] !== undefined &&
-				direction.split(', ')[1].length > 4
-			) {
-				//if the destiantion has weird commas in it! but we don't want to wind up with Hbf either
-				direction = direction.split(', ')[1];
-			}
-
-			//strip S + U
-			if (direction.split('S ')[1] !== undefined) {
-				direction = direction.split('S ')[1];
-			}
-			if (direction.split('U ')[1] !== undefined) {
-				direction = direction.split('U ')[1];
-			}
-
-			return direction;
-		};
-
 		const renderedArrivals = this.props.arrivals.map(arrival => (
 			<li
 				key={arrival.journeyId}
@@ -48,7 +29,7 @@ class Arrivals extends Component {
 					<strong>
 						{arrival.line.symbol + (arrival.line.nr ? arrival.line.nr : '')}
 					</strong>{' '}
-					{renderDirection(arrival.direction)}
+					{cleanStationName(arrival.direction)}
 				</span>
 				<strong className="timeTo">{renderMinutes(arrival.when)}</strong>
 			</li>
@@ -56,7 +37,7 @@ class Arrivals extends Component {
 
 		return (
 			<div className="App">
-				<ul>{renderedArrivals}</ul>
+				<ul className={this.props.loading ? 'blur' : ''}>{renderedArrivals}</ul>
 			</div>
 		);
 	}

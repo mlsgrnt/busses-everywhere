@@ -5,6 +5,7 @@ import vbb from 'vbb-client';
 import stations from 'vbb-stations';
 import autocomplete from 'vbb-stations-autocomplete';
 import victor from 'victor';
+import cleanStationName from './cleanStationName';
 
 import Locate from './Locate';
 import Arrivals from './Arrivals';
@@ -22,13 +23,7 @@ class App extends Component {
 		};
 	}
 
-	componentDidUpdate = (prevProps, prevState) => {
-		/*if (this.state.station !== prevState.station) {
-			this.setState({
-				filteredArrivals: undefined
-			});
-		}*/
-	};
+	componentDidUpdate = (prevProps, prevState) => {};
 
 	getArrivals = async station => {
 		//preapre for next time
@@ -130,9 +125,14 @@ class App extends Component {
 		return (
 			<div className="container">
 				<div>
-					<h1 className="stationName">{this.state.station.name}</h1>
+					<h1 className="stationName">
+						{cleanStationName(this.state.station.name)}
+					</h1>
 
-					<Arrivals arrivals={this.state.filteredArrivals} />
+					<Arrivals
+						arrivals={this.state.filteredArrivals}
+						loading={this.state.loading}
+					/>
 				</div>
 				<Locate
 					handleStation={this.handleStation}
