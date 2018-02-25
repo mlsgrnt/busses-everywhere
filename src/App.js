@@ -132,7 +132,11 @@ class App extends Component {
 			filteredArrivals = this.state.arrivals;
 		}
 		this.setState({
-			filteredArrivals
+			loading: true
+		});
+		this.setState({
+			filteredArrivals,
+			loading: false
 		});
 	};
 
