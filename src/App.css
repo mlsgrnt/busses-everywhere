@@ -72,7 +72,8 @@ li[id^='u'] {
 .ferry {
 	background-color: #528dba;
 }
-.regional {
+.regional,
+.express {
 	background-color: #c1121c;
 }
 
@@ -93,7 +94,8 @@ li[id^='bus-m'] {
 #u4 {
 	background-color: #f0d722;
 }
-#u5 {
+#u5,
+#u55 {
 	background-color: #7e5330;
 }
 #u6 {
