@@ -94,40 +94,40 @@ class App extends Component {
 					filteredArrivals: this.state.arrivals
 				});
 			}
-			return;
-		}
-		let filteredArrivals = [];
-		const arrivals = this.state.arrivals;
+		} else {
+			let filteredArrivals = [];
+			const arrivals = this.state.arrivals;
 
-		for (let i in arrivals) {
-			let direction = arrivals[i].direction;
-			if (direction.split(', ')[1] !== undefined) {
-				//if the destiantion has weird commas in it!
-				direction = direction.split(', ')[1];
-			}
+			for (let i in arrivals) {
+				let direction = arrivals[i].direction;
+				if (direction.split(', ')[1] !== undefined) {
+					//if the destiantion has weird commas in it!
+					direction = direction.split(', ')[1];
+				}
 
-			const destination = await stations(
-				autocomplete(direction, 1, false, false)[0].id
-			);
+				const destination = await stations(
+					autocomplete(direction, 1, false, false)[0].id
+				);
 
-			if (destination === undefined) {
-				//we can't find the destination. let's add it just to be safe
-				//TODO: in the future look at the next stop of this line! --> use stations.nextStop to figure it out --> the "fallback algorithm"
-				filteredArrivals.push(arrivals[i]);
-				continue;
-			}
+				if (destination === undefined) {
+					//we can't find the destination. let's add it just to be safe
+					//TODO: in the future look at the next stop of this line! --> use stations.nextStop to figure it out --> the "fallback algorithm"
+					filteredArrivals.push(arrivals[i]);
+					continue;
+				}
 
-			const me = new victor(position.latitude, position.longitude);
-			const you = new victor(
-				destination[0].location.latitude,
-				destination[0].location.longitude
-			);
+				const me = new victor(position.latitude, position.longitude);
+				const you = new victor(
+					destination[0].location.latitude,
+					destination[0].location.longitude
+				);
 
-			const us = you.subtract(me);
+				const us = you.subtract(me);
 
-			const score = Math.abs(heading - us.horizontalAngleDeg()) / heading * 100; //margin of error! between "actual" angle and calculated angle
+				const score =
+					Math.abs(heading - us.horizontalAngleDeg()) / heading * 100; //margin of error! between "actual" angle and calculated angle
 
-			/*console.log(
+				/*console.log(
 				direction,
 				'with scores',
 				score,
@@ -137,20 +137,21 @@ class App extends Component {
 				heading
 			);*/
 
-			if (Math.abs(score) < 45) {
-				//45% error seems to be sweet spot
-				filteredArrivals.push(arrivals[i]);
+				if (Math.abs(score) < 45) {
+					//45% error seems to be sweet spot
+					filteredArrivals.push(arrivals[i]);
+				}
 			}
-		}
 
-		if (filteredArrivals && filteredArrivals.length === 0) {
-			//whoopsie hehe
-			filteredArrivals = this.state.arrivals;
+			if (filteredArrivals && filteredArrivals.length === 0) {
+				//whoopsie hehe
+				filteredArrivals = this.state.arrivals;
+			}
+			this.setState({
+				filteredArrivals,
+				loading: false
+			});
 		}
-		this.setState({
-			filteredArrivals,
-			loading: false
-		});
 	};
 
 	render() {
