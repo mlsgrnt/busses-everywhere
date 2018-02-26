@@ -62,7 +62,7 @@ class Locate extends Component {
 		//wait for compass to heat up
 		setTimeout(() => {
 			if (this.state.orientation) {
-				setInterval(this.handleCompassData, 200); //this doesn't rely on internet anymore so we can make this much faster
+				setInterval(this.handleCompassData, 333); //this doesn't rely on internet anymore so we can make this much faster
 			}
 		}, 250);
 	};
