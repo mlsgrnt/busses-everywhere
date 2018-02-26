@@ -87,7 +87,7 @@ class App extends Component {
 	};
 
 	handleDirectionChange = async (heading, position, compassActivated) => {
-		if (!compassActivated) {
+		if (compassActivated === false) {
 			//to fully disable
 			if (this.state.filteredArrivals !== this.state.arrivals) {
 				this.setState({
@@ -147,9 +147,6 @@ class App extends Component {
 			//whoopsie hehe
 			filteredArrivals = this.state.arrivals;
 		}
-		this.setState({
-			loading: true
-		});
 		this.setState({
 			filteredArrivals,
 			loading: false
