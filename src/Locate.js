@@ -64,7 +64,7 @@ class Locate extends Component {
 			if (this.state.orientation) {
 				setInterval(this.handleCompassData, 200); //this doesn't rely on internet anymore so we can make this much faster
 			}
-		}, 250);
+		}, 750);
 	};
 
 	handleCompassData = () => {
