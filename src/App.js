@@ -47,7 +47,7 @@ class App extends Component {
 
 		if (!this.state.arrivals) {
 			this.setState({
-				arrivals: await vbb.departures(station.id),
+				filteredArrivals: await vbb.departures(station.id),
 				loading: false
 			});
 		}
@@ -58,25 +58,30 @@ class App extends Component {
 			results: 10
 		});
 
+		//save it to storage
 		localStorage.setItem(
 			'staleArrivals',
 			JSON.stringify(arrivals.slice(0, 10))
 		);
 
-		this.setState({
-			arrivals: arrivals,
-			filteredArrivals: arrivals,
-			loading: false
-		});
-
-		//filter!
-		if (this.state.compassActivated !== undefined) {
-			this.handleDirectionChange(
-				this.state.heading,
-				this.state.position,
-				this.state.compassActivated
-			);
-		}
+		//commit!
+		this.setState(
+			{
+				arrivals: arrivals,
+				filteredArrivals: arrivals,
+				loading: false
+			},
+			() => {
+				//filter! (if applicable)
+				if (this.state.compassActivated !== undefined) {
+					this.handleDirectionChange(
+						this.state.heading,
+						this.state.position,
+						this.state.compassActivated
+					);
+				}
+			}
+		);
 	};
 
 	handleStation = nearestStations => {
