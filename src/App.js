@@ -68,6 +68,15 @@ class App extends Component {
 			filteredArrivals: arrivals,
 			loading: false
 		});
+
+		//filter!
+		if (this.state.compassActivated !== undefined) {
+			this.handleDirectionChange(
+				this.state.heading,
+				this.state.position,
+				this.state.compassActivated
+			);
+		}
 	};
 
 	handleStation = nearestStations => {
@@ -88,6 +97,13 @@ class App extends Component {
 	};
 
 	handleDirectionChange = async (heading, position, compassActivated) => {
+		//for later, when we clkean this all up
+		this.setState({
+			heading,
+			position,
+			compassActivated
+		});
+
 		if (compassActivated === false) {
 			//to fully disable
 			if (this.state.filteredArrivals !== this.state.arrivals) {
@@ -130,17 +146,26 @@ class App extends Component {
 				const score =
 					Math.abs(heading - us.horizontalAngleDeg()) / heading * 100; //margin of error! between "actual" angle and calculated angle
 
-				/*console.log(
-				direction,
-				'with scores',
-				score,
-				'with vectorAngle',
-				us.horizontalAngleDeg(),
-				'at direction',
-				heading
-			);*/
+				const magnitude = us.magnitude();
 
-				if (Math.abs(score) < 45) {
+				/*console.log(
+					direction,
+					'with scores',
+					score,
+					'with vectorAngle',
+					us.horizontalAngleDeg(),
+					'with magnitude',
+					magnitude,
+					'at direction',
+					heading
+				);*/
+
+				let errorThreshhold = 45;
+				if (magnitude > 0.1) {
+					errorThreshhold = magnitude * 300; //bolster the angle if it's far away!
+				}
+
+				if (Math.abs(score) < errorThreshhold) {
 					//45% error seems to be sweet spot
 					filteredArrivals.push(arrivals[i]);
 				}
