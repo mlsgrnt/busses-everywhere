@@ -9,7 +9,8 @@ class Locate extends Component {
 			loading: false,
 			compassActivated: true,
 			orientation: false,
-			position: { coords: { latitude: 0, longitude: 0 } }
+			position: { coords: { latitude: 0, longitude: 0 } },
+			compassActiveHack: 0
 		};
 	}
 
@@ -54,7 +55,8 @@ class Locate extends Component {
 	componentDidMount = () => {
 		window.addEventListener('deviceorientation', orientation => {
 			this.setState({
-				orientation: orientation.webkitCompassHeading
+				orientation: orientation.webkitCompassHeading,
+				compassActiveHack: this.state.compassActiveHack + 1
 			});
 		});
 
@@ -62,8 +64,14 @@ class Locate extends Component {
 	};
 
 	componentDidUpdate(prevProps, prevState) {
-		if (this.state.orientation !== false && prevState.orientation === false) {
-			setInterval(this.handleCompassData, 200); //this doesn't rely on internet anymore so we can make this much faster
+		if (
+			this.state.orientation !== false &&
+			this.state.compassActiveHack === 10
+		) {
+			this.setState({
+				compassActiveHack: 0
+			});
+			this.handleCompassData();
 		}
 	}
 
