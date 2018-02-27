@@ -27,6 +27,16 @@ class App extends Component {
 		};
 	}
 
+	shouldComponentUpdate(nextProps, nextState) {
+		if (
+			nextState.filteredArrivals === undefined ||
+			nextState.filteredArrivals.length === 0
+		) {
+			return false;
+		}
+		return true;
+	}
+
 	componentDidUpdate = (prevProps, prevState) => {
 		if (prevState.station.name !== this.state.station.name) {
 			this.setState({
