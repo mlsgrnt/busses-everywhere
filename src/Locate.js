@@ -54,7 +54,7 @@ class Locate extends Component {
 	componentDidMount = () => {
 		window.addEventListener('deviceorientation', orientation => {
 			this.setState({
-				orientation: orientation
+				orientation: orientation.webkitCompassHeading
 			});
 		});
 
@@ -69,7 +69,7 @@ class Locate extends Component {
 
 	handleCompassData = () => {
 		this.props.handleDirectionChange(
-			this.state.orientation.webkitCompassHeading,
+			this.state.orientation,
 			this.state.position.coords,
 			this.state.compassActivated
 		);

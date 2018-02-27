@@ -107,7 +107,9 @@ class App extends Component {
 				}
 
 				const destination = await stations(
-					autocomplete(direction, 1, false, false)[0].id
+					autocomplete(direction, 1, false, false)[0]
+						? autocomplete(direction, 1, false, false)[0].id
+						: undefined
 				);
 
 				if (destination === undefined) {
@@ -164,7 +166,7 @@ class App extends Component {
 						handleDirectionChange={this.handleDirectionChange}
 					/>
 					<h1 className="stationName">
-						<Textfit mode="single">
+						<Textfit mode="single" min={10} max={70}>
 							{cleanStationName(this.state.station.name)}
 						</Textfit>
 					</h1>
