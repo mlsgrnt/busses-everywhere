@@ -8,6 +8,7 @@ class Locate extends Component {
 		this.state = {
 			loading: false,
 			compassActivated: true,
+			orientation: false,
 			position: { coords: { latitude: 0, longitude: 0 } }
 		};
 	}
@@ -58,14 +59,13 @@ class Locate extends Component {
 		});
 
 		this.getPosition();
-
-		//wait for compass to heat up
-		setTimeout(() => {
-			if (this.state.orientation) {
-				setInterval(this.handleCompassData, 200); //this doesn't rely on internet anymore so we can make this much faster
-			}
-		}, 750);
 	};
+
+	componentDidUpdate(prevProps, prevState) {
+		if (this.state.orientation !== false && prevState.orientation === false) {
+			setInterval(this.handleCompassData, 200); //this doesn't rely on internet anymore so we can make this much faster
+		}
+	}
 
 	handleCompassData = () => {
 		this.props.handleDirectionChange(
