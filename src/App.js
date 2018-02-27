@@ -9,6 +9,7 @@ import cleanStationName from './cleanStationName';
 
 import Locate from './Locate';
 import Arrivals from './Arrivals';
+import { Textfit } from 'react-textfit';
 
 let updateTimeout;
 
@@ -163,7 +164,9 @@ class App extends Component {
 						handleDirectionChange={this.handleDirectionChange}
 					/>
 					<h1 className="stationName">
-						{cleanStationName(this.state.station.name)}
+						<Textfit mode="single">
+							{cleanStationName(this.state.station.name)}
+						</Textfit>
 					</h1>
 
 					<Arrivals

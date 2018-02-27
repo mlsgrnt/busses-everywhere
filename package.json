@@ -7,6 +7,7 @@
 		"react": "^16.2.0",
 		"react-dom": "^16.2.0",
 		"react-scripts": "1.1.1",
+		"react-textfit": "^1.1.0",
 		"vbb-client": "^3.0.1",
 		"vbb-stations": "^6.2.1",
 		"vbb-stations-autocomplete": "^3.2.0",
@@ -15,8 +16,7 @@
 	"scripts": {
 		"start": "react-scripts start",
 		"now-start": "serve -s build",
-		"now-build":
-			"echo not cd node_modules/vbb-stations/ && echo not npm i && echo not npm run build && echo not cd ../.. && cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && cd vbb-stations && npx babel-cli --presets es2015 index.js --out-file index.js && npx babel-cli --presets es2015 simple.js --out-file simple.js && cd .. && npx babel-cli --presets es2015 vbb-client --out-dir vbb-client && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && npm run build",
+		"now-build": "echo not cd node_modules/vbb-stations/ && echo not npm i && echo not npm run build && echo not cd ../.. && cd node_modules && npx babel-cli --presets es2015 vbb-tokenize-station --out-dir vbb-tokenize-station && cd vbb-stations && npx babel-cli --presets es2015 index.js --out-file index.js && npx babel-cli --presets es2015 simple.js --out-file simple.js && cd .. && npx babel-cli --presets es2015 vbb-client --out-dir vbb-client && npx babel-cli --presets es2015 hifo --out-dir hifo && cd .. && npm run build",
 		"build": "react-scripts build",
 		"surge": "react-scripts build && cd build && surge -d busses.surge.sh",
 		"test": "react-scripts test --env=jsdom",
