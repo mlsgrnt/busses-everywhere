@@ -106,10 +106,10 @@ class App extends Component {
 					direction = direction.split(', ')[1];
 				}
 
+				const autocompleted = autocomplete(direction, 1, false, false)[0];
+
 				const destination = await stations(
-					autocomplete(direction, 1, false, false)[0]
-						? autocomplete(direction, 1, false, false)[0].id
-						: undefined
+					autocompleted ? autocompleted[0].id : undefined
 				);
 
 				if (destination === undefined) {
