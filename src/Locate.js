@@ -6,7 +6,6 @@ class Locate extends Component {
 		super();
 
 		this.state = {
-			loading: false,
 			compassActivated: true,
 			orientation: false,
 			position: { coords: { latitude: 0, longitude: 0 } },
@@ -22,10 +21,6 @@ class Locate extends Component {
 		});
 
 		this.props.handleStation(await nearby);
-
-		this.setState({
-			loading: true
-		});
 	};
 
 	getPosition = () => {

@@ -109,7 +109,7 @@ class App extends Component {
 			compassActivated
 		});
 
-		if (compassActivated === false) {
+		if (compassActivated === false || this.state.loading === true) {
 			//to fully disable
 			if (this.state.filteredArrivals !== this.state.arrivals) {
 				this.setState({
