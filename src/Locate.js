@@ -85,10 +85,9 @@ class Locate extends Component {
 
 	render() {
 		return (
-			<span
-				className={'locateTouchRegion ' + !this.state.compassActivated}
-				onClick={this.handleTap}
-			/>
+			<span className={'locateTouchRegion'} onClick={this.handleTap}>
+				<span className={'' + !this.state.compassActivated} />
+			</span>
 		);
 	}
 }

@@ -4,17 +4,23 @@
 }
 
 .locateTouchRegion {
-	height: 70px;
+	height: 100px;
 	width: 100vw;
 	z-index: 5;
 	position: absolute;
 	right: 0;
 	top: 0;
-	opacity: 0.25;
 	-webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
-.locateTouchRegion.true {
+.locateTouchRegion .true {
+	position: absolute;
+	right: 0;
+	top: 0;
+	z-index: 5;
+	opacity: 0.5;
 	background: #f0d722;
+	height: 10px;
+	width: 100vw;
 }
 
 .blur {
@@ -33,7 +39,7 @@
 
 .stationName {
 	display: block;
-	font-size: 50px;
+	max-width: 75vw;
 	margin: 5px;
 	word-wrap: normal;
 	word-break: break-all;
@@ -68,7 +74,7 @@ li[id^='u'] {
 	align-items: center;
 	justify-content: flex-end;
 
-	text-shadow: 1px 1px rgba(40, 40, 40, 0.2);
+	text-shadow: 1px 1px rgba(40, 40, 40, 0.1);
 }
 
 .bus {
