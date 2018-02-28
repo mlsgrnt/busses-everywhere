@@ -157,31 +157,24 @@ class App extends Component {
 				);
 
 				const us = you.subtract(me);
-
-				const score =
-					Math.abs(heading - us.horizontalAngleDeg()) / heading * 100; //margin of error! between "actual" angle and calculated angle
-
 				const magnitude = us.magnitude();
+
+				const score = Math.abs(us.horizontalAngleDeg() - heading);
+				const errorThreshhold = 45 + magnitude * 100;
 
 				/*console.log(
 					direction,
 					'with scores',
 					score,
+					'with errorThreshold',
+					errorThreshhold,
 					'with vectorAngle',
 					us.horizontalAngleDeg(),
-					'with magnitude',
-					magnitude,
 					'at direction',
 					heading
 				);*/
 
-				let errorThreshhold = 45;
-				//if (magnitude > 0.1) {
-				errorThreshhold = magnitude * 300; //bolster the angle if it's far away!
-				//}
-
-				if (Math.abs(score) < errorThreshhold) {
-					//45% error seems to be sweet spot
+				if (score < errorThreshhold) {
 					filteredArrivals.push(arrivals[i]);
 				}
 			}
