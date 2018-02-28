@@ -176,9 +176,9 @@ class App extends Component {
 				);*/
 
 				let errorThreshhold = 45;
-				if (magnitude > 0.1) {
-					errorThreshhold = magnitude * 300; //bolster the angle if it's far away!
-				}
+				//if (magnitude > 0.1) {
+				errorThreshhold = magnitude * 300; //bolster the angle if it's far away!
+				//}
 
 				if (Math.abs(score) < errorThreshhold) {
 					//45% error seems to be sweet spot
