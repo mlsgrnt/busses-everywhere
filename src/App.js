@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import './App.css';
+import lineData from './lines.json';
 
 import vbb from 'vbb-client';
 import stations from 'vbb-stations';
@@ -10,6 +11,15 @@ import cleanStationName from './cleanStationName';
 import Locate from './Locate';
 import Arrivals from './Arrivals';
 import { Textfit } from 'react-textfit';
+
+const lineInfo = lineName => {
+	const elementPos = lineData
+		.map(function(x) {
+			return x.name;
+		})
+		.indexOf(lineName);
+	return lineData[elementPos];
+};
 
 let updateTimeout;
 
@@ -131,6 +141,20 @@ class App extends Component {
 			const arrivals = this.state.arrivals;
 
 			for (let i in arrivals) {
+				const line = lineInfo(arrivals[i].line.name);
+				const longestRoute =
+					line.variants[
+						line.variants.reduce(
+							(p, c, i, a) => (a[p].length > c.length ? i : p),
+							0
+						)
+					];
+
+				console.log(line);
+				console.log(await stations(longestRoute[0]));
+				console.log(this.state.station.id);
+				console.log(longestRoute.indexOf(this.state.station.id));
+
 				let direction = arrivals[i].direction;
 				if (direction.split(', ')[1] !== undefined) {
 					//if the destiantion has weird commas in it!
@@ -142,6 +166,8 @@ class App extends Component {
 				const destination = await stations(
 					autocompleted[0] ? autocompleted[0].id : undefined
 				);
+
+				console.log(longestRoute.indexOf(destination.id));
 
 				if (destination === undefined) {
 					//we can't find the destination. let's add it just to be safe
