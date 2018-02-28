@@ -160,7 +160,7 @@ class App extends Component {
 				const magnitude = us.magnitude();
 
 				const score = Math.abs(us.horizontalAngleDeg() - heading);
-				const errorThreshhold = 45 + magnitude * 100;
+				const errorThreshhold = 55 + magnitude * 100;
 
 				/*console.log(
 					direction,
